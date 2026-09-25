@@ -386,7 +386,7 @@ RE::BSEventNotifyControl EventProcessor::ProcessEvent(RE::InputEvent* const* eve
     // menu with UI messages)
     auto* ui = RE::UI::GetSingleton();
 
-    if (ui && !ui->IsMenuOpen(RE::MapMenu::MENU_NAME) && !otherWorld && !pendingWorldSwitch && !pendingMapReopen) {
+    if (ui && !ui->IsMenuOpen(RE::MapMenu::MENU_NAME) && !otherWorld && !pendingWorldSwitch && !pendingMapReopen && !g_mapWorldOverrideActive) {
         auto* player = RE::PlayerCharacter::GetSingleton();
         auto* playerWorld = player ? player->GetWorldspace() : nullptr;
 
@@ -424,6 +424,7 @@ RE::BSEventNotifyControl EventProcessor::ProcessEvent(const RE::TESFastTravelEnd
     pendingMapReopen = false;
     cloudSwapPending = false;
     backup = nullptr;
+    g_mapWorldOverrideActive = false;
 
     return RE::BSEventNotifyControl::kContinue;
 }
